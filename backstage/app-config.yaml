@@ -63,7 +63,13 @@ techdocs:
 
 auth:
   # see https://backstage.io/docs/auth/ to learn about auth providers
-  providers: {}
+  environment: development
+  providers:
+    microsoft:
+      development:
+        clientId: a88137a4-04e4-4d6a-bf69-3b15d15684ee
+        clientSecret: uhy8Q~6rPSWKt-pw3j.xrZo5IF15poL-t944nb7D
+        tenantId: a48496de-7638-4752-a6ce-86a47007681d
 
 scaffolder:
   # see https://backstage.io/docs/features/software-templates/configuration for software template options
