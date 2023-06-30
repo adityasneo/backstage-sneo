@@ -45,7 +45,7 @@ const app = createApp({
         auto
         provider={{
           id: 'microsoft-auth-provider',
-          title: 'microsoft',
+          title: 'MicrosoftAzure',
           message: 'Sign in using microsoft',
           apiRef: microsoftAuthApiRef,
         }}
