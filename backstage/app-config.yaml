@@ -78,16 +78,38 @@ catalog:
   providers:
     microsoftGraphOrg:
       providerId:
-        tenantId: a48496de-7638-4752-a6ce-86a47007681d
-        clientId: a88137a4-04e4-4d6a-bf69-3b15d15684ee
-        clientSecret: uhy8Q~6rPSWKt-pw3j.xrZo5IF15poL-t944nb7D
+        target: https://graph.microsoft.com/v1.0
+        authority: https://login.microsoftonline.com
+        # If you don't know you tenantId, you can use Microsoft Graph Explorer
+        # to query it
+        tenantId: ${AZURE_TENANT_ID}
+        # Optional ClientId and ClientSecret if you don't want to use `DefaultAzureCredential`
+        # for authentication
+        # Client Id and Secret can be created under Certificates & secrets in
+        # the App registration in the Microsoft Azure Portal.
+        clientId: ${AZURE_CLIENT_ID}
+        clientSecret: ${AZURE_CLIENT_SECRET}
+        # Optional mode for querying which defaults to "basic".
+        # By default, the Microsoft Graph API only provides the basic feature set
+        # for querying. Certain features are limited to advanced querying capabilities.
+        # (See https://docs.microsoft.com/en-us/graph/aad-advanced-queries)
+        queryMode: basic # basic | advanced
+        # Optional configuration block
         user:
+          # Optional parameter to include the expanded resource or collection referenced
+          # by a single relationship (navigation property) in your results.
+          # Only one relationship can be expanded in a single request.
+          # See https://docs.microsoft.com/en-us/graph/query-parameters#expand-parameter
+          # Can be combined with userGroupMember[...] instead of userFilter.
+          expand: manager
+          # Optional filter for user, see Microsoft Graph API for the syntax
+          # See https://docs.microsoft.com/en-us/graph/api/resources/user?view=graph-rest-1.0#properties
+          # and for the syntax https://docs.microsoft.com/en-us/graph/query-parameters#filter-parameter
+          # This and userGroupMemberFilter are mutually exclusive, only one can be specified
           filter: accountEnabled eq true and userType eq 'member'
-        group:
-          filter: >
-            securityEnabled eq false
-            and mailEnabled eq true
-            and groupTypes/any(c:c+eq+'Unified')
+          # See  https://docs.microsoft.com/en-us/graph/api/resources/schemaextension?view=graph-rest-1.0
+          select: ['id', 'displayName', 'description']
+        
             
   import:
     entityFilename: catalog-info.yaml
