@@ -110,17 +110,6 @@ catalog:
           # See  https://docs.microsoft.com/en-us/graph/api/resources/schemaextension?view=graph-rest-1.0
           select: ['id', 'displayName', 'description']
         # Optional configuration block
-        userGroupMember:
-          # Optional filter for users, use group membership to get users.
-          # (Filtered groups and fetch their members.)
-          # This and userFilter are mutually exclusive, only one can be specified
-          # See https://docs.microsoft.com/en-us/graph/search-query-parameter
-          filter: "displayName eq 'Backstage Users'"
-          # Optional search for users, use group membership to get users.
-          # (Search for groups and fetch their members.)
-          # This and userFilter are mutually exclusive, only one can be specified
-          search: '"description:One" AND ("displayName:Video" OR "displayName:Drive")'
-        # Optional configuration block
         group:
           # Optional parameter to include the expanded resource or collection referenced
           # by a single relationship (navigation property) in your results.
