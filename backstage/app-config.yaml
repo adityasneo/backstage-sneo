@@ -78,10 +78,6 @@ catalog:
   providers:
     microsoftGraphOrg:
       providerId:
-        target: https://graph.microsoft.com/v1.0
-        authority: https://login.microsoftonline.com
-        # If you don't know you tenantId, you can use Microsoft Graph Explorer
-        # to query it
         tenantId: a48496de-7638-4752-a6ce-86a47007681d
         # Optional ClientId and ClientSecret if you don't want to use `DefaultAzureCredential`
         # for authentication
