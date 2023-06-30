@@ -109,6 +109,42 @@ catalog:
           filter: accountEnabled eq true and userType eq 'member'
           # See  https://docs.microsoft.com/en-us/graph/api/resources/schemaextension?view=graph-rest-1.0
           select: ['id', 'displayName', 'description']
+        # Optional configuration block
+        userGroupMember:
+          # Optional filter for users, use group membership to get users.
+          # (Filtered groups and fetch their members.)
+          # This and userFilter are mutually exclusive, only one can be specified
+          # See https://docs.microsoft.com/en-us/graph/search-query-parameter
+          filter: "displayName eq 'Backstage Users'"
+          # Optional search for users, use group membership to get users.
+          # (Search for groups and fetch their members.)
+          # This and userFilter are mutually exclusive, only one can be specified
+          search: '"description:One" AND ("displayName:Video" OR "displayName:Drive")'
+        # Optional configuration block
+        group:
+          # Optional parameter to include the expanded resource or collection referenced
+          # by a single relationship (navigation property) in your results.
+          # Only one relationship can be expanded in a single request.
+          # See https://docs.microsoft.com/en-us/graph/query-parameters#expand-parameter
+          # Can be combined with userGroupMember[...] instead of userFilter.
+          expand: member
+          # Optional filter for group, see Microsoft Graph API for the syntax
+          # See https://docs.microsoft.com/en-us/graph/api/resources/group?view=graph-rest-1.0#properties
+          filter: securityEnabled eq false and mailEnabled eq true and groupTypes/any(c:c+eq+'Unified')
+          # Optional search for groups, see Microsoft Graph API for the syntax
+          # See https://docs.microsoft.com/en-us/graph/search-query-parameter
+          search: '"description:One" AND ("displayName:Video" OR "displayName:Drive")'
+          # Optional select for groups, this will allow you work with schemaExtensions
+          # in order to add extra information to your groups that can be used on your custom groupTransformers
+          # See  https://docs.microsoft.com/en-us/graph/api/resources/schemaextension?view=graph-rest-1.0
+          select: ['id', 'displayName', 'description']
+        schedule: # optional; same options as in TaskScheduleDefinition
+          # supports cron, ISO duration, "human duration" as used in code
+          frequency: { hours: 1 }
+          # supports ISO duration, "human duration" as used in code
+          timeout: { minutes: 50 }
+          # supports ISO duration, "human duration" as used in code
+          initialDelay: { seconds: 15},
         
             
   import:
