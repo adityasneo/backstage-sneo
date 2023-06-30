@@ -144,7 +144,7 @@ catalog:
           # supports ISO duration, "human duration" as used in code
           timeout: { minutes: 50 }
           # supports ISO duration, "human duration" as used in code
-          initialDelay: { seconds: 15},
+          initialDelay: { seconds: 15}
         
             
   import:
